@@ -130,22 +130,6 @@ class ExcelController extends Controller
 		
 		$res[$count]['Total'] 							= $total;
 		
-		/*
-		$res[$count]['Admission Submitted'] 			= $admission_submitted;
-		$res[$count]['ArogyaMitra Out Patient'] 		= $arogyamitra_out_patient;
-		$res[$count]['Discharge Summary Submitted'] 	= $discharge_summary_submitted;
-		$res[$count]['In Patient Case Registered'] 		= $in_patient_case_registered;
-		$res[$count]['Preauth Approved'] 				= $preauth_approved;
-		$res[$count]['Preauth Pending By TPA'] 			= $preauth_pending_by_tpa;
-		$res[$count]['Preauth Rejected'] 				= $preauth_rejected;
-
-		$res[$count]['Claims Pending By TPA'] 			= $claims_pending_by_tpa;
-		$res[$count]['Claims Approved'] 				= $claims_approved;
-
-		$res[$count]['Pending Preauth Replied By Hospital'] = $pending_preauth_replied_by_hospital;
-		$res[$count]['PreAuth Request Sent'] 				= $preauth_request_sent;
-		*/
-
 		$res[$count]['Under Process'] 					= $preauth_request_sent;
 
 		$res[$count]['Approved'] 						= $preauth_approved;
@@ -158,19 +142,21 @@ class ExcelController extends Controller
 
 		$res[$count]['Rejected'] 						= $preauth_rejected;
 
+
+		////////*************************////
+
 		$res[$count]['Admission Submitted'] 			= $admission_submitted;
 
 		$res[$count]['Discharge Submitted'] 			= $discharge_summary_submitted;
 
 		$res[$count]['Billing Submitted'] 				= $billing_submitted;
 
-		////////*************************////
-
 		$res[$count]['ArogyaMitra Out Patient'] 		= $arogyamitra_out_patient;
 		
 		$res[$count]['In Patient Case Registered'] 		= $in_patient_case_registered;
 
 		$res[$count]['Claims Pending By TPA'] 			= $claims_pending_by_tpa;
+
 		$res[$count]['Claims Approved'] 				= $claims_approved;
 		
 		//////************************////////
@@ -230,11 +216,11 @@ class ExcelController extends Controller
 	public function processExcelReport(Request $request) {
 		$path = $request->file('mis_excel')->getRealPath();
     	$data = Excel::load($path, function($reader) {})->get();
-    	//dd($data->toArray());
+    	
 
     	$excel_array = [];
 
-    	$cstatus = [];
+    	$cstatus = $hsptl = [];
 
     	foreach($data->toArray() as $k => $v) {
 			if($v['ccn'] != ''):
@@ -242,7 +228,15 @@ class ExcelController extends Controller
 			endif;
 		}
 		$unique_current_status = array_unique($cstatus);
-		
+
+
+		foreach($data->toArray() as $k => $v) {
+			if($v['hospital_name'] != ''):
+				$hsptl[] = $v['hospital_name'];
+			endif;
+		}
+		$unique_hospitals = array_unique($hsptl);
+		//dd($unique_hospitals);
 
 		$admission_submitted 			= $arogyamitra_out_patient 		= 0;
 		$discharge_summary_submitted 	= $in_patient_case_registered 	= 0;
