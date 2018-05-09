@@ -252,9 +252,17 @@ class ExcelController extends Controller
 		$jorhat = $tinsukia = $darrang = $morigaon = $karbi_anglong = $cachar = $bongaigaon = $dima_hasao = $nagaon = 0;
 		$dibrugarh = $sonitpur = $goalpara = $karimganj = $hailakandi = 0;
 
+		$dispur_hospital = $northeast_cancer = $tezpur_medical_college = 0;
+
+
 		$bbci = $gmch = $gmc_cancer = $smch = $nsh = $ash = $dth = $hayat = $marwari = 0;
 		$jmc = $rtiics = $faamc = $amch = $cchrc = $nemcare = $gnrc_dispur = $narayana_hrid = $dpnh = 0;
 		$hcgh = 0;
+
+		$gnrc_institute = $tata_memorial = $swagat = $apollo = 0;
+
+		$excelcare = 0;
+
 
 		$total = 0;
 
@@ -267,6 +275,37 @@ class ExcelController extends Controller
 				//dump($v['hospital_name']);
 				if($v['hospital_name'] == 'B. Barooah Cancer Institute') {
 					$bbci++;
+				} 
+
+				if($v['hospital_name'] == 'Tezpur Medical College & Hospital') {
+					$tezpur_medical_college++;
+				} 
+
+				if($v['hospital_name'] == 'North East Cancer Hospital and Research Institute') {
+					$northeast_cancer++;
+				} 
+
+
+				if($v['hospital_name'] == 'Excelcare Hoapitals') {
+					$excelcare++;
+				} 
+
+				if($v['hospital_name'] == 'Excelcare Hoapitals') {
+					$excelcare++;
+				} 
+
+
+				if($v['hospital_name'] == 'GNRC Institute of Medical Sciences') {
+					$gnrc_institute++;
+				} 
+
+
+				if($v['hospital_name'] == 'Dispur Hospitals Pvt Ltd') {
+					$dispur_hospital++;
+				} 
+
+				if($v['hospital_name'] == 'GNRC Dispur') {
+					$gnrc_dispur++;
 				}
 
 				if($v['hospital_name'] == 'Nemcare Hospital') {
@@ -332,6 +371,24 @@ class ExcelController extends Controller
 				if($v['hospital_name'] == 'Narayana Hrudalya') {
 					$narayana_hrid++;
 				}
+
+				if($v['hospital_name'] == 'Cachar Cancer Hospital & Research Centre') {
+					$cachar++;
+				}
+
+
+				if($v['hospital_name'] == 'Apollo Hospital (earlier International Hospital)') {
+					$apollo++;
+				}
+
+				if($v['hospital_name'] == 'Tata memorial hospital') {
+					$tata_memorial++;
+				}
+
+				if($v['hospital_name'] == 'Swagat Superspeciality Surgical Institute') {
+					$swagat++;
+				}
+ 
 
 
  
@@ -419,6 +476,8 @@ class ExcelController extends Controller
 				if(strtolower($v['district']) == 'hailakandi') {
 					$hailakandi++;
 				}
+
+
 
 
 
